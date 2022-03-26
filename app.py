@@ -6,7 +6,9 @@ from flask import Flask
 from flask_restx import Api
 from flask_cors import CORS
 from flask_pymongo import PyMongo
-from resources import products
+from resources.categorys import Categories, Category
+from resources.products import Products, Product
+
 
 app = Flask(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})
@@ -17,7 +19,11 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 mongo = PyMongo(app)
 
-api.add_resource(products.Products, '/product/')
+api.add_resource(Products, '/product/')
+api.add_resource(Product, '/product/<int:productId>')
+api.add_resource(Categories, '/category/')
+api.add_resource(Category, '/category/<int:categoryId>')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

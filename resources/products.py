@@ -7,9 +7,9 @@ class Products(Resource):
 
     def get(self):
 
-        import app
+        from app import mongo
 
-        productsGetAll = app.mongo.db.Products.find()
+        productsGetAll = mongo.db.Products.find()
 
         resp = json_util.dumps(productsGetAll)
 
@@ -41,52 +41,47 @@ class Products(Resource):
                           help="productDescription cannot be empty.")
 
         data = args.parse_args()
-        print(data)
-        if data['productCategory'] and data['productCostPrice'] and data['productEAN'] and data['productName'] and data['productProvider'] and data['productSKU'] and data['productSellPrice'] and data['productStock'] and data['productDescription']:
 
-            data['productSKU'] = ''.join(
-                filter(str.isalnum, data['productSKU']))
+        data['productSKU'] = ''.join(
+            filter(str.isalnum, data['productSKU']))
 
-            print()
+        print()
 
-            idTeste = app.mongo.db.Products.estimated_document_count()
+        idTeste = app.mongo.db.Products.estimated_document_count()
 
-            productsFilterCount = idTeste if idTeste == 0 else app.mongo.db.Products.find(
-            ).sort('id', -1).limit(1)[0]['id']
-            productsFilterCount = int(productsFilterCount) + 1
+        productsFilterCount = idTeste if idTeste == 0 else app.mongo.db.Products.find(
+        ).sort('id', -1).limit(1)[0]['id']
+        productsFilterCount = int(productsFilterCount) + 1
 
-            app.mongo.db.Products.insert_one(
-                {'id': int(productsFilterCount),
-                 'productCategory': str(data['productCategory']),
-                 'productCostPrice': int(data['productCostPrice']),
-                 'productEAN': int(data['productEAN']),
-                 'productName': data['productName'],
-                 'productProvider': data['productProvider'],
-                 'productSKU': data['productSKU'],
-                 'productSellPrice': int(data['productSellPrice']),
-                 'productStock': int(data['productStock']),
-                 'productDescription': data['productDescription']
-                 }
-            )
+        app.mongo.db.Products.insert_one(
+            {'id': int(productsFilterCount),
+             'productCategory': str(data['productCategory']),
+             'productCostPrice': int(data['productCostPrice']),
+             'productEAN': int(data['productEAN']),
+             'productName': data['productName'],
+             'productProvider': data['productProvider'],
+             'productSKU': data['productSKU'],
+             'productSellPrice': int(data['productSellPrice']),
+             'productStock': int(data['productStock']),
+             'productDescription': data['productDescription']
+             }
+        )
 
-            productReturn = app.mongo.db.Products.find(
-                {'id': int(productsFilterCount)})
+        productReturn = app.mongo.db.Products.find(
+            {'id': int(productsFilterCount)})
 
-            resp = json_util.dumps(productReturn)
+        resp = json_util.dumps(productReturn)
 
-            return Response(resp, mimetype='application/json')
-
-        else:
-            return {'message': 'Cannot post this product. Try again later.'}
+        return Response(resp, mimetype='application/json')
 
 
 class Product(Resource):
 
     def get(self, productId):
 
-        import app
+        from app import mongo
 
-        product = app.mongo.db.Products.find({'id': productId})
+        product = mongo.db.Products.find({'id': productId})
 
         resp = json_util.dumps(product)
 
