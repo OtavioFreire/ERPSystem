@@ -3,12 +3,11 @@
 #   pip install -r requirements.txt
 
 from flask import Flask
-from flask_restx import Api
+from flask_restx import Api, fields
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from resources.categorys import Categories, Category
 from resources.products import Products, Product
-
 
 app = Flask(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})

@@ -17,7 +17,9 @@ class Products(Resource):
 
     def post(self):
 
-        import app
+        from app import mongo
+
+        from resources.models.product import ProductModel
 
         args = reqparse.RequestParser()
 
@@ -40,35 +42,12 @@ class Products(Resource):
         args.add_argument('productDescription', type=str, required=True,
                           help="productDescription cannot be empty.")
 
-        data = args.parse_args()
+        productModel = ProductModel(args.parse_args())
 
-        data['productSKU'] = ''.join(
-            filter(str.isalnum, data['productSKU']))
+        mongo.db.Products.insert_one(productModel.getProduct())
 
-        print()
-
-        idTeste = app.mongo.db.Products.estimated_document_count()
-
-        productsFilterCount = idTeste if idTeste == 0 else app.mongo.db.Products.find(
-        ).sort('id', -1).limit(1)[0]['id']
-        productsFilterCount = int(productsFilterCount) + 1
-
-        app.mongo.db.Products.insert_one(
-            {'id': int(productsFilterCount),
-             'productCategory': str(data['productCategory']),
-             'productCostPrice': int(data['productCostPrice']),
-             'productEAN': int(data['productEAN']),
-             'productName': data['productName'],
-             'productProvider': data['productProvider'],
-             'productSKU': data['productSKU'],
-             'productSellPrice': int(data['productSellPrice']),
-             'productStock': int(data['productStock']),
-             'productDescription': data['productDescription']
-             }
-        )
-
-        productReturn = app.mongo.db.Products.find(
-            {'id': int(productsFilterCount)})
+        productReturn = mongo.db.Products.find(
+            {'id': int(productModel.id)})
 
         resp = json_util.dumps(productReturn)
 
@@ -99,6 +78,8 @@ class Product(Resource):
 
         import app
 
+        from resources.models.product import ProductModel
+
         args = reqparse.RequestParser()
 
         args.add_argument('productName', type=str, required=True,
@@ -119,22 +100,11 @@ class Product(Resource):
                           help="productProvider cannot be empty.")
         args.add_argument('productDescription', type=str)
 
-        data = args.parse_args()
-
-        print(data['productStock'])
+        productModel = ProductModel(args.parse_args())
 
         productEdit = app.mongo.db.Products.find_one_and_update(
             {'id': productId},
-            {'$set': {'productName': data['productName'],
-                      'productSKU': data['productSKU'],
-                      'productCategory': data['productCategory'],
-                      'productEAN': int(data['productEAN']),
-                      'productCostPrice': int(data['productCostPrice']),
-                      'productSellPrice': int(data['productSellPrice']),
-                      'productStock': int(data['productStock']),
-                      'productProvider': data['productProvider'],
-                      'productDescription': data['productDescription']
-                      }, })
+            {'$set': productModel.putProduct()})
 
         resp = json_util.dumps(productEdit)
 
