@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from resources.categorys import Categories, Category
 from resources.products import Products, Product
-from resources.providers import Providers, Provider
+from resources.suppliers import Suppliers, Supplier
 
 app = Flask(__name__)
 CORS(app, resources={r'/*': {'origins': '*'}})
@@ -26,15 +26,15 @@ ns_product = api.namespace('product',
 ns_category = api.namespace('category',
                             description='Todas requisições referente ao endpoint Category')
 
-ns_provider = api.namespace('provider',
-                            description='Todas requisições referente ao endpoint Provider')
+ns_provider = api.namespace('supplier',
+                            description='Todas requisições referente ao endpoint Supplier')
 
 ns_product.add_resource(Products, '/')
 ns_product.add_resource(Product, '/<int:productId>')
 ns_category.add_resource(Categories, '/')
 ns_category.add_resource(Category, '/<int:categoryId>')
-ns_provider.add_resource(Providers, '/')
-ns_provider.add_resource(Provider, '/<int:providerId>')
+ns_provider.add_resource(Suppliers, '/')
+ns_provider.add_resource(Supplier, '/<int:supplierId>')
 
 
 if __name__ == '__main__':
