@@ -6,7 +6,9 @@ from bson import json_util
 class Category(Resource):
 
     def get(self, categoryId):
-
+        '''
+            Retorna um categoria especifico passando um categoryID de referencia. 
+        '''
         from app import mongo
 
         category = mongo.db.Categories.find({'id': categoryId})
@@ -16,7 +18,9 @@ class Category(Resource):
         return Response(resp, mimetype='application/json')
 
     def delete(self, categoryId):
-
+        '''
+            Deleta um categoria desde que seja passado o categoryID do produto que deseja deletar. 
+        '''
         from app import mongo
 
         mongo.db.Categories.delete_one({'id': categoryId})
@@ -24,7 +28,9 @@ class Category(Resource):
         return {'message': 'This category has been deleted.'}
 
     def put(self, categoryId):
-
+        '''
+            Passando um categoryID e as informações necessárias atualiza as informações no DB sobre esta categoria.
+        '''
         from app import mongo
         from resources.models.categorie import CategorieModel
 
@@ -48,7 +54,9 @@ class Category(Resource):
 
 class Categories(Resource):
     def get(self):
-
+        '''
+            Retorna todas as categorias existentes no DB. 
+        '''
         from app import mongo
 
         categoriesGetAll = mongo.db.Categories.find()
@@ -57,6 +65,9 @@ class Categories(Resource):
         return Response(resp, mimetype='application/json')
 
     def post(self):
+        '''
+            Cria uma categoria nova passando os atributos necessários.
+        '''
         from app import mongo
         from resources.models.categorie import CategorieModel
 

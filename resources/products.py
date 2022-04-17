@@ -6,6 +6,9 @@ from bson import json_util
 class Products(Resource):
 
     def get(self):
+        '''
+            Retorna todos os produtos cadastrados. 
+        '''
 
         from app import mongo
 
@@ -16,6 +19,9 @@ class Products(Resource):
         return Response(resp, mimetype='application/json')
 
     def post(self):
+        '''
+            Retorna um novo produto apartir das informações passadas pelo RequestParser
+        '''
 
         from app import mongo
 
@@ -57,6 +63,9 @@ class Products(Resource):
 class Product(Resource):
 
     def get(self, productId):
+        '''
+            Retorna um produto especifico passando um productID de referencia. 
+        '''
 
         from app import mongo
 
@@ -67,6 +76,9 @@ class Product(Resource):
         return Response(resp, mimetype='application/json')
 
     def delete(self, productId):
+        '''
+            Deleta um produto desde que seja passado o productID do produto que deseja deletar. 
+        '''
 
         import app
 
@@ -75,7 +87,9 @@ class Product(Resource):
         return {'message': 'Deletado'}
 
     def put(self, productId):
-
+        '''
+            Passando um productID e as informações necessárias atualiza as informações no DB sobre este produto.
+        '''
         import app
 
         from resources.models.product import ProductModel
