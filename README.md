@@ -1,8 +1,17 @@
 # ERPSystem
 
 Requisitos:
+Clone o Repositorio
 
-Execute o "pip install -r requirements.txt" em seu console.
+Abra com o Editor e no console crie uma venv
+
+"python -m venv venv"
+
+depois digite no console "CMD",
+
+em seguida digite ".\venv\Scripts\activate.bat"
+
+Então execute o "pip install -r requirements.txt" em seu console.
 
 # Tecnologias e conhecimentos usados:
 
