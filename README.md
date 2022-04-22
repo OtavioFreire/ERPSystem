@@ -13,6 +13,10 @@ em seguida digite ".\venv\Scripts\activate.bat"
 
 Então execute o "pip install -r requirements.txt" em seu console.
 
+e para rodar o projeto digite "python app.py"
+
+-ATENÇÃO VERIFIQUE SE ESTA NA PASTA QUE O APP.PY-
+
 # Tecnologias e conhecimentos usados:
 
 - [Python](https://docs.python.org/pt-br/3/tutorial/)
