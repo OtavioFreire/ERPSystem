@@ -50,7 +50,7 @@ class Products(Resource):
 
         productModel = ProductModel(args.parse_args())
 
-        mongo.db.Products.insert_one(productModel.getProduct())
+        mongo.db.Products.insert_one(productModel.productNew())
 
         productReturn = mongo.db.Products.find(
             {'id': int(productModel.id)})
