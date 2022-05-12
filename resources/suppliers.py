@@ -39,8 +39,8 @@ class Suppliers(Resource):
                           help="supplierPhone cannot be empty.")
         args.add_argument('supplierRepresenter', type=str, required=True,
                           help="supplierRepresenter cannot be empty.")
-        args.add_argument('supplierDistrict', type=str, required=True,
-                          help="supplierDistrict cannot be empty.")
+        args.add_argument('supplierCity', type=str, required=True,
+                          help="supplierCity cannot be empty.")
         args.add_argument('supplierState', type=str, required=True,
                           help="supplierState cannot be empty.")
         args.add_argument('supplierNumber', type=str, required=True,
@@ -105,8 +105,8 @@ class Supplier(Resource):
                           help="supplierPhone cannot be empty.")
         args.add_argument('supplierRepresenter', type=str, required=True,
                           help="supplierRepresenter cannot be empty.")
-        args.add_argument('supplierDistrict', type=str, required=True,
-                          help="supplierDistrict cannot be empty.")
+        args.add_argument('supplierCity', type=str, required=True,
+                          help="supplierCity cannot be empty.")
         args.add_argument('supplierState', type=str, required=True,
                           help="supplierState cannot be empty.")
         args.add_argument('supplierNumber', type=str, required=True,

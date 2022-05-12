@@ -10,7 +10,7 @@ class SupplierModel:
         self.supplierCNPJ = args['supplierCNPJ']
         self.supplierPhone = args['supplierPhone']
         self.supplierRepresenter = args['supplierRepresenter']
-        self.supplierDistrict = args['supplierDistrict']
+        self.supplierCity = args['supplierCity']
         self.supplierState = args['supplierState']
         self.supplierNumber = args['supplierNumber']
 
@@ -30,7 +30,7 @@ class SupplierModel:
                     'supplierCNPJ': self.supplierCNPJ,
                     'supplierPhone': self.supplierPhone,
                     'supplierRepresenter': self.supplierRepresenter,
-                    'supplierDistrict': self.supplierDistrict,
+                    'supplierCity': self.supplierCity,
                     'supplierState': self.supplierState,
                     'supplierNumber': self.supplierNumber
                     }
@@ -45,7 +45,7 @@ class SupplierModel:
             'supplierCNPJ': self.supplierCNPJ,
             'supplierPhone': self.supplierPhone,
             'supplierRepresenter': self.supplierRepresenter,
-            'supplierDistrict': self.supplierDistrict,
+            'supplierCity': self.supplierCity,
             'supplierState': self.supplierState,
             'supplierNumber': self.supplierNumber
         }
