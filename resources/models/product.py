@@ -27,12 +27,12 @@ class ProductModel:
 
         argsJson = {'id': int(productsFilterCount),
                     'productCategory': str(self.productCategory),
-                    'productCostPrice': int(self.productCostPrice),
+                    'productCostPrice': str(self.productCostPrice),
                     'productEAN': int(self.productEAN),
                     'productName': self.productName,
                     'productProvider': self.productProvider,
                     'productSKU': self.productSKU,
-                    'productSellPrice': int(self.productSellPrice),
+                    'productSellPrice': str(self.productSellPrice),
                     'productStock': int(self.productStock),
                     'productDescription': self.productDescription
                     }
@@ -43,12 +43,12 @@ class ProductModel:
 
         argsJson = {
             'productCategory': str(self.productCategory),
-            'productCostPrice': int(self.productCostPrice),
+            'productCostPrice': str(self.productCostPrice),
             'productEAN': int(self.productEAN),
             'productName': self.productName,
             'productProvider': self.productProvider,
             'productSKU': self.productSKU,
-            'productSellPrice': int(self.productSellPrice),
+            'productSellPrice': str(self.productSellPrice),
             'productStock': int(self.productStock),
             'productDescription': self.productDescription
         }
